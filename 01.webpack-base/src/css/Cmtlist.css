@@ -1,0 +1,9 @@
+.title{
+    color:red;
+    text-align: center;
+}
+/* css模块化只针对类选择器和id选择器模块化 */
+/* h1{
+    font-style: italic;
+} */
+
