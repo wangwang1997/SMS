@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zte.sms.dao.UserDao">
+	<sql id="userColumn">
+		id			"id",
+		username	"username",
+		password	"password",
+		phone		"phone",
+		create_date	"createDate",
+		status		"status"
+	</sql>
+	<select id="selectByUsername" parameterType="string" resultType="User">
+		select <include refid="userColumn"></include>
+		from t_user
+		where username=#{username} 
+	</select>	
+	
+	<insert id="insert" parameterType="User">
+		insert into t_user
+			(username,password,phone,create_date,status)
+		values
+			(#{username},#{password},#{phone},#{createDate},#{status})
+	</insert>
+	
+	<select id="selectByUsernameAndPassword" resultType="User">
+		select <include refid="userColumn"></include>
+		from t_user
+		where username=#{username}
+		and password=#{password}
+	</select>
+	
+	<select id="selectAll" resultType="User">
+	  select * from t_user
+	</select>
+</mapper>

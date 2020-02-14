@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-mappings>
+  <!-- 用户登录 -->
+  <action path="/sysuser/login" type="com.zte.sms.action.SysuserAction"  method="login"> 
+      <result name="admin"  path="/student/findAll.do"/>
+      <result name="student"  path="/WEB-INF/pages/studentPage/studentMain.jsp"/>
+      <result name="fail"  path="/login.jsp" type=""/>
+  </action>
+  
+  <!-- 显示首页 -->
+  <action path="/student/findAll" type="com.zte.sms.action.StudentAction"  method="findStudents">
+  		<result name="adminMain" path="/WEB-INF/pages/adminPage/adminMain1.jsp"></result>
+  </action>
+  
+  <!-- ajax分页 -->
+  <action path="/student/findAllByPage" type="com.zte.sms.action.StudentAction"  method="findStudentsByPage">
+  
+  		<result type="json"/>
+  
+  </action>
+  
+  <!-- ajax修改管理员密码 -->
+  <action path="/sysuser/modifyPwd" type="com.zte.sms.action.SysuserAction" method="modifyPwd">
+  	  <result type="json"/>
+  </action>
+  
+  <!-- 退出系统  -->
+  <action path="/sysuser/logOut" type="com.zte.sms.action.SysuserAction" method="logOut">
+     <result type="json"/>
+  </action>
+  
+  <!-- 学生管理主界面 -->
+  <action path="/student/studentManage" type="com.zte.sms.action.StudentAction" method="toStudentManage">
+  	  <result name="toStudentManage" path="/WEB-INF/pages/adminPage/studentManage.jsp"/>	
+  </action>
+  
+  <!-- 管理员班级界面 -->
+  <action path="/grade/gradeManage" type="com.zte.sms.action.GradeAction" method="toGradeManage">
+  	<result name="toGradeManage" path="/WEB-INF/pages/adminPage/gradeManage.jsp"/>
+  </action>
+  
+  <!-- 删除班级By id -->
+  <action path="/grade/deleteGrade" type="com.zte.sms.action.GradeAction" method="deleteGrade">
+  	<result name="toGradeManage" path="/WEB-INF/pages/adminPage/gradeManage.jsp"/>
+  </action>
+  
+  <!-- 显示修改班级页面 -->
+  <action path="/grade/findById" type="com.zte.sms.action.GradeAction" method="findById">
+      <result type="json"/>
+  </action>
+  
+  <!-- 添加班级 -->
+  <action path="/grade/addGrade" type="com.zte.sms.action.GradeAction" method="addGrade">
+  	<result name="toGradeManage" path="/WEB-INF/pages/adminPage/gradeManage.jsp"/>
+  </action>
+  
+  <!-- 班级ajax分页 -->
+  <action path="/grade/findAllGrade" type="com.zte.sms.action.GradeAction" method="findGradesByPage">
+  	<result type="json"/>
+  </action>
+  
+  <!-- 课程ajax分页 -->
+  <action path="/course/findAllCourse" type="com.zte.sms.action.CourseAction" method="findCoursesByPage">
+  	<result type="json"/>
+  </action>
+  
+  
+  <!-- 博客ajax分页 -->
+  <action path="/blog/findAllBlog" type="com.zte.sms.action.BlogAction" method="findBlogsByPage">
+  	<result type="json"/>
+  </action>
+  
+  
+   <!-- 管理员课程界面 -->
+   <action path="/course/courseManage" type="com.zte.sms.action.CourseAction" method="toCourseManage">
+  	<result name="toCourseManage" path="/WEB-INF/pages/adminPage/courseManager.jsp"/>
+  </action>
+  
+  
+  
+  <!-- 管理员博客界面 -->
+  <action path="/blog/blogManage" type="com.zte.sms.action.BlogAction" method="toBlogManage">
+  	<result name="toBlogManage" path="/WEB-INF/pages/adminPage/blogManager.jsp"/>
+  </action>
+  <!-- 删除blogBy id -->
+  <action path="/grade/deleteBlog" type="com.zte.sms.action.BlogAction" method="deleteBlog">
+	<result name="toBlogManage" path="/WEB-INF/pages/adminPage/blogManager.jsp"/>
+  </action>
+  <!-- 校验用户名是否已经存在 -->
+  <action path="/student/findByUsername" type="com.zte.sms.action.StudentAction" method="findByUsername">
+      <result type="json"/>
+  </action>
+  
+  <!-- 新增学员 -->
+  <action path="/student/addStudent" type="com.zte.sms.action.StudentAction"  method="addStudent">
+  	<result name="toStudentManage" path="/WEB-INF/pages/adminPage/studentManage.jsp"/>	
+  </action>
+  
+  <!-- 显示修改学员页面 -->
+  <action path="/student/findById" type="com.zte.sms.action.StudentAction" method="findById">
+      <result type="json"/>
+  </action>
+  
+  <!-- 修改学生 -->
+  <action path="/student/modifyStudent" type="com.zte.sms.action.StudentAction"   method="modifyStudent">
+  	  <result name="toStudentManage" path="/WEB-INF/pages/adminPage/studentManage.jsp"/>	
+  </action>
+  
+  <!-- 删除学员 -->
+  <action path="/student/deleteStudent" type="com.zte.sms.action.StudentAction" method="deleteStudent">
+  	  <result name="toStudentManage" path="/WEB-INF/pages/adminPage/studentManage.jsp"/>	
+  </action>
+  
+  <!-- 导出数据到excel文件 -->
+  <action path="/student/exportExcel" type="com.zte.sms.action.StudentAction"  method="exportExcel">
+      <!-- 这里仅仅标志没有返回值 -->
+  	  <result type="json"/>
+  </action>
+  
+  <!-- 将excel文件中的数据导入到数据表中 -->
+  <action path="/student/importExcel" type="com.zte.sms.action.StudentAction" method="importExcel">
+  		<result name="toStudentManage" path="/WEB-INF/pages/adminPage/studentManage.jsp"/>
+  </action>
+  
+  <!-- 按条件查询 -->
+  <action path="/student/findByCondition" type="com.zte.sms.action.StudentAction" method="findByCondition">
+  	<result type="json"/>
+  </action>
+
+
+
+	<!-- 前台学生首页 -->
+	<action path="/student/findAllBlog" type="com.zte.sms.action.StudentAction" method="toStudentMain">
+		<result name="toMain" path="/WEB-INF/pages/studentPage/studentMain.jsp"/>
+	</action>
+	
+  <!-- 前台学生用户博客 -->
+  <action path="/blog/Myblog" type="com.zte.sms.action.StudentAction" method="findMyBlog">
+  	<result name="toMyBlog" path="/WEB-INF/pages/studentPage/studentBlog.jsp"/>
+  </action>
+  
+  <action path="/blog/findStudentBlog" type="com.zte.sms.action.BlogAction" method="findBlog">
+	 <result type="json"/>
+  </action>
+  
+  <!-- 前台学生发表博客 -->
+  <action path="/blog/newblog" type="com.zte.sms.action.BlogAction" method="CreateMyBlog">
+  	<result name="NewBlog" path="/WEB-INF/pages/studentPage/newBlog.jsp"/>
+  </action>
+  
+  <!-- 学生发表博客  -->
+  <action path="/blog/AddBlog" type="com.zte.sms.action.BlogAction" method="addMyBlog">
+  	<result name="toMyBlog" path="/WEB-INF/pages/studentPage/studentBlog.jsp"/>
+  </action>
+
+	<!-- 显示博客详情 -->
+	<action path="/blog/blogDetail" type="com.zte.sms.action.BlogAction" method="findBlogDetail">
+		<result name="toDetail" path="/WEB-INF/pages/studentPage/blogDetail.jsp"/>
+	</action>
+
+	<!-- 学生修改个人信息 -->
+	<action path="/student/toModifyInfo" type="com.zte.sms.action.StudentAction" method="toModifyInfo">
+		<result name="toModifyInfo" path="/WEB-INF/pages/studentPage/modifyStudentInfo.jsp"/>
+	</action>
+</action-mappings>
+

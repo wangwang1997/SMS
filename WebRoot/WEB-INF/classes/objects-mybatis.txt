@@ -1,0 +1,16 @@
+transaction=com.zte.sms.transaction.impl.MyBatisTransactionManager
+mybatisDao=com.zte.sms.dao
+sysuserService=com.zte.sms.service.impl.SysuserServiceImpl
+sysuserProxy=com.zte.sms.service.proxy.SysuserProxy
+
+studentService=com.zte.sms.service.impl.StudentServiceImpl
+studentProxy=com.zte.sms.service.proxy.StudentProxy
+
+gradeService=com.zte.sms.service.impl.GradeServcieImpl
+gradeProxy=com.zte.sms.service.proxy.GradeProxy
+
+courseService=com.zte.sms.service.impl.CourseServcieImpl
+courseProxy=com.zte.sms.service.proxy.CourseProxy
+
+blogService=com.zte.sms.service.impl.BlogServiceImpl
+blogProxy=com.zte.sms.service.proxy.BlogProxy

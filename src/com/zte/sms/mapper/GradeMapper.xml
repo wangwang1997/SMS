@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.zte.sms.dao.GradeDao">
+
+
+   <!-- 
+   
+   List<Grade> selectAll();
+   
+    -->
+    <select id="selectAll" resultType="Grade">
+    	SELECT
+			gid,gname,gdesc,state
+		from
+			grade
+    </select>
+    
+    <!-- 
+    Integer selectIdByName(String stringCellValue);
+     -->
+    <select id="selectIdByName" resultType="int">
+    	SELECT
+
+			gid
+		
+		FROM
+		
+			grade
+		
+		where 
+		
+			gname=#{gname};
+    </select>
+    
+    <!-- void deleteById(int gid); -->
+    
+    <delete id="deleteById">
+    
+    	DELETE
+    	FROM
+    	grade
+    	WHERE
+    	gid=#{gid}
+    </delete>
+    
+    <!-- Grade selectById(int gid); -->
+    
+    <select id="selectById" resultType="Grade">
+    SELECT
+    	gid,gname,gdesc
+    FROM
+    	grade
+    WHERE
+    	gid= #{gid}
+    </select>
+    <!-- void insertGrade(Grade grade); -->
+    <insert id="insertGrade" parameterType="Grade">
+    	INSERT
+    	INTO
+    	grade
+    	(gname,gdesc,state)
+    	VALUES
+    	(#{gname},#{gdesc},#{state})
+    </insert>
+</mapper>

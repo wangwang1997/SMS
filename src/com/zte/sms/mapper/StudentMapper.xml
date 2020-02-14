@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zte.sms.dao.StudentDao">
+
+   <resultMap type="Student" id="studentResultMap">
+      <id property="sid" column="sid"/>
+      <result property="username" column="username"/>
+      <result property="password" column="password"/>
+      <result property="name" column="name"/>
+      <result property="gender" column="gender"/>
+      <result property="age" column="age"/>
+      
+      <association property="grade" javaType="grade">
+         <id property="gid" column="gid"/>
+         <result property="gname" column="gname"/>
+      </association>
+      <association property="course" javaType="course">
+         <id property="cid" column="cid"/>
+      	 <result property="cname" column="cname"/>
+      </association>
+   
+   </resultMap>
+
+   
+    
+    <!--  
+    public List<Student> selectStudentsByPage();
+      -->
+    <select id="selectStudentsByPage" resultMap="studentResultMap">
+    	select 
+			s.sid,s.username,s.password,s.name,s.age,s.gender,g.gname,c.cname
+		FROM
+			student  s
+		LEFT JOIN grade g 
+			on s.gid=g.gid
+		LEFT JOIN course c
+			on s.cid=c.cid
+    </select>  
+    
+    <!-- 
+    	public Student selectByUsername(String username);
+     -->
+     <select id="selectByUsername" resultType="Student">
+     	SELECT
+			s.sid,s.username,s.password,s.name,s.gender,s.age,g.gid,g.gname,c.cid,c.cname
+		
+		FROM
+		
+			student s
+		
+		LEFT JOIN
+			grade g
+		ON 
+		    s.gid=g.gid
+		LEFT JOIN
+			course c
+		on 
+		    s.cid=c.cid
+		
+		where 
+			s.username=#{username}
+
+     	
+     </select>
+     
+     <!-- public void insertStudent(Student student); -->
+     <insert id="insertStudent" parameterType="Student">
+     	INSERT
+		INTO
+			student
+		(username,PASSWORD,NAME,gender,age,gid,cid)
+		VALUES(#{username},#{password},#{name},#{gender},#{age},#{gid},#{cid})
+     </insert>
+     
+     <!-- 
+     public Student selectById(int sid);
+      -->
+     <select id="selectById" resultMap="studentResultMap">
+     	SELECT
+			s.sid,s.username,s.password,s.name,s.gender,s.age,g.gid,g.gname,c.cid,c.cname
+		
+		FROM
+		
+			student s
+		
+		LEFT JOIN
+			grade g
+		ON 
+		    s.gid=g.gid
+		LEFT JOIN
+			course c
+		on 
+		    s.cid=c.cid
+		
+		where 
+			s.sid=#{sid}
+     </select>
+     
+     
+     <!-- 
+     public void updateStudent(Student student);
+       -->
+     <update id="updateStudent" parameterType="student">
+     	UPDATE
+			student
+		set 
+			username=#{username},name=#{name},age=#{age},gender=#{gender},gid=#{gid},cid=#{cid}
+		WHERE
+			sid=#{sid}
+     </update>
+     
+     <!-- 
+     public void deleteById(int sid);
+      -->
+     <delete id="deleteById">
+     	DELETE
+
+		FROM
+		
+			student
+		
+		WHERE
+		
+			sid=#{sid}
+     </delete>
+     
+     <!-- 
+     public List<Student> selectStudentsByCondition(StudentVO studentVO);
+      -->
+      <select id="selectStudentsByCondition" resultMap="studentResultMap" 
+      parameterType="com.zte.sms.vo.StudentVO">
+    	select 
+			s.sid,s.username,s.password,s.name,s.age,s.gender,g.gname,c.cname
+		FROM
+			student  s
+		LEFT JOIN grade g 
+			on s.gid=g.gid
+		LEFT JOIN course c
+			on s.cid=c.cid
+	    <where>
+	    	<if test="name!=null and name !=''">
+	    		and s.name like #{name}
+	    	</if>
+	    	<if test="minAge!=null and minAge !=0">
+	    		and s.age &gt;= #{minAge}
+	    	</if>
+	    	<if test="maxAge!=null and maxAge !=0">
+	    		and s.age &lt;= #{maxAge}
+	    	</if>
+	    	<if test="gender!=null">
+	    		and s.gender = #{gender}
+	    	</if>
+	    	<if test="gid!=null and gid !=0">
+	    		and s.gid = #{gid}
+	    	</if>
+	    	<if test="cid!=null and cid !=0">
+	    		and s.cid = #{cid}
+	    	</if>
+	    	
+	    </where>
+    </select>  
+     
+    <!-- selectByNameAndPass(studentVo); -->
+    <select id="selectByNameAndPass" parameterType="com.zte.sms.vo.StudentVO" resultType="Student">
+    
+    
+    select 
+		sid,username,password
+	FROM
+		student
+	where 
+		username=#{username} and password=#{password}
+    
+    </select>
+    
+
+
+</mapper>

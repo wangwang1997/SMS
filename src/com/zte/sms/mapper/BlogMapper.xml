@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.zte.sms.dao.BlogDao">
+
+<resultMap type="Blog" id="blogMap">
+      <id property="bid" column="bid"/>
+      <result property="title" column="title"/>
+      <result property="content" column="content"/>
+      <result property="createDate" column="createDate"/>
+      <association property="student" javaType="student">
+         <id property="sid" column="sid"/>
+         <result property="username" column="username"/>
+      </association>
+     
+   
+   </resultMap>
+
+<select id="selectAll" resultMap="blogMap">
+		SELECT
+			b.bid,b.title,b.content,b.createDate,b.sid,s.sid 's.sid',s.username 'username'
+		FROM
+			blog b
+		LEFT JOIN
+			student s
+		ON b.sid = s.sid
+	</select>
+	<!-- void deleteById(int bid); -->
+	<delete id="deleteById">
+		DELETE
+		FROM 
+		blog
+		WHERE
+		bid=#{bid}
+	</delete>
+	
+	 <!-- List<Blog> selectBlogsById(int sid); -->
+	<select id="selectBlogsById" resultType="blog">
+		SELECT
+		bid,title,content,createDate,sid
+		From
+		blog
+		where
+			sid=#{sid}
+		
+		
+	</select>
+	
+	<insert id="insert" parameterType="blog">
+		INSERT 
+		INTO
+		blog
+		(title,content,createDate,sid)
+		VALUES
+		(#{title},#{content},#{createDate},#{student.sid})
+	
+	</insert>
+	
+	<!-- Blog selectById(int bid); -->
+	<select id="selectById" resultType="Blog">
+		SELECT 
+			bid,title,content,createDate
+		FROM
+		  blog
+		  WHERE
+		  	bid=#{bid}
+	</select>
+</mapper>
